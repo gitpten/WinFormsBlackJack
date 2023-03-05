@@ -14,11 +14,11 @@ namespace GraphicsInfrastructure
 
         private GraphicsStore cardStore;
 
-        public GraphicsCardSet(Panel panel, CardSet cardSet, GraphicsStore cardStore)
+        public GraphicsCardSet(Panel panel, CardSet cardSet)
         {
             Panel = panel;
             CardSet = cardSet;
-            this.cardStore = cardStore;
+            this.cardStore = new GraphicsStore(cardSet);
         }
 
         public void Draw(bool opened = true)

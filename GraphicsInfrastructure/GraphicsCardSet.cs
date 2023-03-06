@@ -20,7 +20,7 @@ namespace GraphicsInfrastructure
             this.cardStore = store;
             Frame = frame;
         }
-        public void Draw(bool opened = true)
+        public void Draw(Predicate<Card> opened)
         {
             
             int h = Frame.Height;
@@ -33,11 +33,17 @@ namespace GraphicsInfrastructure
             for (int i = 0; i < CardSet.Count; i++)
             {
                 var card = CardSet[i];
-                var pb = cardStore.GetPictureBox(card, opened);
+                var pb = cardStore.GetPictureBox(card, opened(card));
                 pb.Size = new Size(w, h);
                 pb.Location = new Point(x0 + i * d, y0);
                 pb.BringToFront();
             }
         }
+
+        public void Draw(bool opened)
+        {
+            Draw(c => opened);
+        }
+
     }
 }

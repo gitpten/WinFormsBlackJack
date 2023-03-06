@@ -33,7 +33,12 @@ namespace WinFormsBlackJack
             SuspendLayout();
             foreach (var set in sets)
             {
-                set.Draw(game.Current.Hand == set.CardSet);
+                if(game.Current == game.Player && set.CardSet == game.Dealer.Hand)
+                    set.Draw(c => c == game.Dealer.Hand[0]);
+                else
+                    set.Draw((set.CardSet != game.Deck) &&
+                        (set.CardSet == game.Player.Hand || game.Current == game.Dealer));
+               
             }
             ResumeLayout();
         }
